@@ -5,8 +5,8 @@ import pandas as pd
 from joblib import load
 from sklearn.model_selection import train_test_split
 
-from src.ml.data import process_data
-from src.ml.model import compute_model_metrics, inference
+from ml_src.ml.data import process_data
+from ml_src.ml.model import compute_model_metrics, inference
 
 
 @pytest.fixture
