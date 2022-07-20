@@ -1,0 +1,4 @@
+[core]
+    remote = udacity-sensus-s3
+['remote "udacity-sensus-s3"']
+    url = s3://udacity-cencus/dataset
