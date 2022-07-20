@@ -61,7 +61,7 @@ def process_data(
     else:
         X_categorical = encoder.transform(X_categorical)
         try:
-            y = lb.transform(y.values).ravel()
+            y = lb.transform(y.values).ravel() # `.ravel` is numpy methods, equivalent to `.reshape(-1)`
         # Catch the case where y is None because we're doing inference.
         except AttributeError:
             pass

@@ -1,5 +1,9 @@
+
+from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
+RANDOM_STATE = 42
 
 # Optional: implement hyperparameter tuning.
 def train_model(X_train, y_train):
@@ -18,7 +22,21 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
 
-    pass
+    model = RandomForestClassifier(n_jobs=-1, random_state=RANDOM_STATE)
+
+    parameters = {
+        "n_estimators": 300,
+        "min_samples_split": 5,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt",
+        "max_depth": 100,
+        "criterion": "gini",
+        "bootstrap": False,
+    }
+    model.set_params(**parameters)
+    model.fit(X_train, y_train)
+
+    return model
 
 
 def compute_model_metrics(y, preds):
@@ -57,4 +75,6 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+
+    preds = model.predict(X)
+    return preds
