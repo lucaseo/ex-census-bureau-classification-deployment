@@ -7,6 +7,6 @@ router = APIRouter()
 async def say_hello_world():
     return JSONResponse(
         content={
-            "msg": "Census ML Inference API"
+            "msg": "Welcome to Census ML Inference API"
         }
     )

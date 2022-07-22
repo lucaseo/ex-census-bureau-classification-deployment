@@ -1,9 +1,11 @@
 # uvicorn main:app --host 0.0.0.0 --port 80 --reload
 
+import uvicorn
 from fastapi import FastAPI
 # from fastapi.middleware.cors import CORSMiddleware
 
-from routers.hello_world import router as router_hello_world
+from api_src.routers.hello_world import router as router_hello_world
+# from .routers.hello_world import router as router_hello_world
 
 def get_application():
     app = FastAPI(title="census_inference_api",
@@ -19,3 +21,11 @@ def get_application():
     return app
 
 app = get_application()
+
+
+if __name__ == "__main__":
+    uvicorn.run(app="app:app",
+                host="127.0.0.1",
+                port=8000,
+                reload=True)
+
