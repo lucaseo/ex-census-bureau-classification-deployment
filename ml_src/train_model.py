@@ -49,7 +49,7 @@ if __name__ == "__main__":
     data = pd.read_csv("./../data/prepared/census_cleaned.csv", sep='\t', encoding='utf-8')
 
     # Optional enhancement, use K-fold cross validation instead of a train-test split.
-    train, test = train_test_split(data, test_size=0.20)
+    train, test = train_test_split(data, test_size=0.15, shuffle=True)
 
     cat_features = [
         "workclass",
@@ -82,9 +82,17 @@ if __name__ == "__main__":
 
     preds = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
+    print(precision, recall, fbeta)
 
-    slice_col_name = "workclass"
-    metrics_sliced = compute_model_metrics_with_slice(model, test, encoder, lb, cat_features, slice_col_name, "salary")
+    slice_col_ls = ['workclass',
+                    'education',
+                    'marital-status',
+                    'race',
+                    'native-country',
+                    'relationship']
+    for s in slice_col_ls:
 
-    with open("./../resources/model_output/slice-output-{}.json".format(slice_col_name), "w") as fp:
-        json.dump(metrics_sliced, fp)
+        metrics_sliced = compute_model_metrics_with_slice(model, test, encoder, lb, cat_features, s, "salary")
+
+        with open("./../resources/model_output/slice-output-{}.json".format(s), "w") as fp:
+            json.dump(metrics_sliced, fp)

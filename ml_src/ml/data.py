@@ -52,13 +52,14 @@ def process_data(
 
     X_categorical = X[categorical_features].values
     X_continuous = X.drop(*[categorical_features], axis=1)
-
+    # print(X_categorical)
     if training is True:
         encoder = OneHotEncoder(sparse=False, handle_unknown="ignore")
         lb = LabelBinarizer()
         X_categorical = encoder.fit_transform(X_categorical)
         y = lb.fit_transform(y.values).ravel()
     else:
+        print(encoder)
         X_categorical = encoder.transform(X_categorical)
         try:
             y = lb.transform(y.values).ravel() # `.ravel` is numpy methods, equivalent to `.reshape(-1)`
