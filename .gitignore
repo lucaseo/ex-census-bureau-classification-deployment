@@ -303,3 +303,6 @@ pip-selfcheck.json
 
 ### .env
 .env
+
+### config
+*_config.yaml
