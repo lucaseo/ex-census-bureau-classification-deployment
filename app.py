@@ -2,25 +2,35 @@
 
 import uvicorn
 from fastapi import FastAPI
-# from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
-from api_src.routers.hello_world import router as router_hello_world
-# from .routers.hello_world import router as router_hello_world
+from api_src.services.inference import CensusClassificationInferenceService
+from api_src.modules.DataClass import InputData
 
-def get_application():
-    app = FastAPI(title="census_inference_api",
-                  version="v0.1",
-                  description="Inference API for census dataset (Udacity Project)")
-    app.include_router(router_hello_world)
-    # app.add_middleware(
-    #     CORSMiddleware,
-    #     allow_credentials=False,
-    #     allow_methods=["*"],
-    #     allow_headers=["*"],
-    # )
-    return app
+app = FastAPI(title="census_inference_api",
+              version="v0.1",
+              description="Inference API for census dataset")
 
-app = get_application()
+census_clf = CensusClassificationInferenceService()
+
+
+@app.on_event("startup")
+async def startup_load_artifact():
+    census_clf.load_artifact()
+
+@app.get("/")
+async def say_hello_world():
+    return JSONResponse(
+        content={
+            "msg": "Welcome to Census ML Inference API"
+        }
+    )
+
+@app.post("/prediction")
+async def predict(payload: InputData):
+
+    output = census_clf.run_inference(payload=payload)
+    return await output
 
 
 if __name__ == "__main__":
@@ -28,4 +38,3 @@ if __name__ == "__main__":
                 host="127.0.0.1",
                 port=8000,
                 reload=True)
-
