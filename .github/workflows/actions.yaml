@@ -46,8 +46,8 @@ jobs:
     - uses: actions/checkout@v2 # 왜 다시...?
 
     - name: Setup DVC
-    - uses: iterative/setup-dvc@v1
-    - run: |
+      uses: iterative/setup-dvc@v1
+      run: |
         dvc pull
 
     - name: Test with pytest
