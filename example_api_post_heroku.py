@@ -8,7 +8,7 @@ headers = {
 
 if __name__ == "__main__":
 
-    url = "http://0.0.0.0:8000/prediction"
+    url = "https://census-classification-udacity.herokuapp.com/prediction"
     data = {"age": 40,
             "workclass": "Private",
             "education": "Doctorate",
