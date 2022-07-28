@@ -1,6 +1,9 @@
 # Census Classification ML API
 
-Income category prediction based on Census data (Udacity Nanodegree project)
+Income category prediction project based on Census data (Udacity Nanodegree project)
+
+Prediction API is currently running on following URI
+- https://census-classification-udacity.herokuapp.com/
 
 ## Key takaways from this project
 
