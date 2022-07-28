@@ -77,12 +77,12 @@ if __name__ == "__main__":
     dump(encoder, "./../model/encoder.joblib")
     dump(lb, "./../model/lb.joblib")
 
-    # function that outputs the performance of the model on slices of the data.
-    # Suggestion: for simplicity, the function can just output the performance on slices of just the categorical features.
-
     preds = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, preds)
     print(precision, recall, fbeta)
+
+    # function that outputs the performance of the model on slices of the data.
+    # Suggestion: for simplicity, the function can just output the performance on slices of just the categorical features.
 
     slice_col_ls = ['workclass',
                     'education',
@@ -96,3 +96,4 @@ if __name__ == "__main__":
 
         with open("./../resources/model_output/slice-output-{}.json".format(s), "w") as fp:
             json.dump(metrics_sliced, fp)
+            print("slice performance saved : {}".format(fp))
