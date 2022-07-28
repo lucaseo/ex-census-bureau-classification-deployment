@@ -1,8 +1,6 @@
 from pydantic import BaseModel, Field
 
 
-
-
 class InputData(BaseModel):
     age: int
     workclass: str

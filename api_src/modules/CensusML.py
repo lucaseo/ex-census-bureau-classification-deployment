@@ -26,18 +26,4 @@ class CensusSalaryClassificationModel:
         self.model = load("./model/model.joblib")
         self.encoder = load("./model/encoder.joblib")
         self.lb = load("./model/lb.joblib")
-    #
-    # async def run_inference(self, payload) -> dict:
-    #
-    #     payload = pd.DataFrame(payload.dict(by_alias=True), index=[0])
-    #
-    #     X, _, _, _ = process_data(X=payload,
-    #                               categorical_features=self.cat_features,
-    #                               label=None,
-    #                               training=False,
-    #                               encoder=self.encoder,
-    #                               lb=self.lb)
-    #     preds = inference(self.model, X)
-    #     label = self.lb.inverse_transform(preds)[0]
-    #     output = {"pred_result": {"salary": label}}
-    #     return output
+

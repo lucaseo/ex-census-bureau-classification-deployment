@@ -1,6 +1,7 @@
 
 # from api_src.settings import settings
 import pandas as pd
+import pydantic
 
 from api_src.modules.CensusML import CensusSalaryClassificationModel
 from ml_src.ml.data import process_data
@@ -11,7 +12,7 @@ class CensusClassificationInferenceService(CensusSalaryClassificationModel):
     def __init__(self):
         super().__init__()
 
-    async def run_inference(self, payload) -> dict:
+    async def run_inference(self, payload: pydantic.BaseModel) -> dict:
 
         payload = pd.DataFrame(payload.dict(by_alias=True), index=[0])
 
