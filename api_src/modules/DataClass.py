@@ -12,3 +12,20 @@ class InputData(BaseModel):
     sex: str
     native_country: str = Field(alias="native-country")
     hours_per_week: int = Field(alias="hours-per-week")
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "age": 40,
+                "workclass": "Private",
+                "education": "Doctorate",
+                "marital-status": "Married-civ-spouse",
+                "occupation": "Prof-specialty",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "native-country": "United-States",
+                "hours-per-week": 60
+            }
+        }
+
